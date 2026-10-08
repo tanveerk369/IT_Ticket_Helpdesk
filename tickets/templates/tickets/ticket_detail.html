@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ticket Details</title>
+</head>
+
+<body>
+
+    <h1>Ticket Details</h1>
+
+    <h2>{{ ticket.title }}</h2>
+
+    <p>
+        <strong>Description:</strong>
+        {{ ticket.description }}
+    </p>
+
+    <p>
+        <strong>Category:</strong>
+        {{ ticket.category }}
+    </p>
+
+    <p>
+        <strong>Priority:</strong>
+        {{ ticket.priority }}
+    </p>
+
+    <p>
+        <strong>Status:</strong>
+        {{ ticket.status }}
+    </p>
+
+    <p>
+        <strong>Created:</strong>
+        {{ ticket.created_at }}
+    </p>
+
+    <br>
+
+    <a href="{% url 'ticket_list' %}">Back to Tickets</a>
+
+    <br><br>
+
+    <a href="{% url 'ticket_update' ticket.id %}">
+        Update Ticket
+    </a>
+
+    <br><br>
+
+    <a href="{% url 'ticket_delete' ticket.id %}">
+        Delete Ticket
+</a>
+</body>
+</html>

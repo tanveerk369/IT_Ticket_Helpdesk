@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IT Help Desk</title>
+</head>
+
+<body>
+
+    <h1>IT Help Desk Tickets</h1>
+    <a href="{% url 'ticket_create' %}">Create New Ticket</a>
+    <br><br>
+    
+    <form method="GET">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Search by ticket title"
+        value="{{ search }}"
+    >
+
+    <select name="status">
+
+        <option value="">All Status</option>
+
+        <option value="Open"
+            {% if status == "Open" %}selected{% endif %}>
+            Open
+        </option>
+
+        <option value="In Progress"
+            {% if status == "In Progress" %}selected{% endif %}>
+            In Progress
+        </option>
+
+        <option value="Resolved"
+            {% if status == "Resolved" %}selected{% endif %}>
+            Resolved
+        </option>
+
+        <option value="Closed"
+            {% if status == "Closed" %}selected{% endif %}>
+            Closed
+        </option>
+
+    </select>
+
+
+    <select name="priority">
+
+    <option value="">All Priorities</option>
+
+    <option value="Low"
+        {% if priority == "Low" %}selected{% endif %}>
+        Low
+    </option>
+
+    <option value="Medium"
+        {% if priority == "Medium" %}selected{% endif %}>
+        Medium
+    </option>
+
+    <option value="High"
+        {% if priority == "High" %}selected{% endif %}>
+        High
+    </option>
+
+    <option value="Critical"
+        {% if priority == "Critical" %}selected{% endif %}>
+        Critical
+    </option>
+
+    </select>
+
+    <button type="submit">Search / Filter</button>
+
+    </form>
+    <br>
+
+    {% if tickets %}
+
+        <table border="1" cellpadding="10">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Created At</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for ticket in tickets %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'ticket_detail' ticket.id %}">
+                                {{ ticket.title }}
+                            </a>
+                        </td>
+                        <td>{{ ticket.category }}</td>
+                        <td>{{ ticket.priority }}</td>
+                        <td>{{ ticket.status }}</td>
+                        <td>{{ ticket.created_at }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+
+        {% if search or status or priority %}
+
+            <p>
+                No tickets found matching your search/filter criteria.
+            </p>
+
+        {% else %}
+
+            <p>No tickets found.</p>
+
+        {% endif %}
+
+    {% endif %}
+
+</body>
+</html>
