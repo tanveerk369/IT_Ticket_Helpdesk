@@ -25,7 +25,7 @@ services:
     environment:
       DB_HOST: db
       DEBUG: "False"
-      ALLOWED_HOSTS: "65.1.95.117"
+      ALLOWED_HOSTS: "13.203.218.186"
     ports:
       - "80:8000"
     depends_on:
